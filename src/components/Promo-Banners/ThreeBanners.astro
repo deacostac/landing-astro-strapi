@@ -1,0 +1,46 @@
+---
+//Banners Promo Data
+const response = await fetch("http://127.0.0.1:1337/api/home?populate[BannersPromo][populate]=*").then(res => res.json())
+const bannersPromo:any = response.data
+const path = 'http://127.0.0.1:1337'
+
+const Banners = [
+  {
+    'href': `${path+JSON.stringify(bannersPromo.attributes.BannersPromo[0].Images.data[0].attributes.formats.large.url).replace(/['"]+/g, '')}`,
+    'alt': `${path+JSON.stringify(bannersPromo.attributes.BannersPromo[0].Images.data[0].attributes.formats.large).replace(/['"]+/g, '')}`,          
+  },
+  {
+    'href': `${path+JSON.stringify(bannersPromo.attributes.BannersPromo[0].Images.data[1].attributes.formats.large.url).replace(/['"]+/g, '')}`,
+    'alt': `${path+JSON.stringify(bannersPromo.attributes.BannersPromo[0].Images.data[1].attributes.formats.large).replace(/['"]+/g, '')}`,
+    'margin': 'm-auto'
+  },
+  {
+    'href': `${path+JSON.stringify(bannersPromo.attributes.BannersPromo[0].Images.data[2].attributes.formats.large.url).replace(/['"]+/g, '')}`,
+    'text': `${path+JSON.stringify(bannersPromo.attributes.BannersPromo[0].Images.data[2].attributes.formats.large).replace(/['"]+/g, '')}`,
+    'margin': 'ml-auto'
+        }]
+
+export interface Props {
+  propBanner:any[];
+  ind:number;  
+}
+
+const {propBanner, ind} = Astro.props;   
+---
+<section>
+  <div class="flex mt-12">
+  {propBanner[ind].image.map((image)=>{
+    return(
+          <div class="promo-container">
+            <img src={image.href} alt={image.alt} class={`m-auto banner w-11/12 flex cursor-pointer`}>
+        </div>
+    )
+})} 
+</div>
+</section>
+
+<style>
+    .banner{
+        width: 50%;
+    }
+</style>

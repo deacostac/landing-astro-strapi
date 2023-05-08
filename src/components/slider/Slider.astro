@@ -1,0 +1,196 @@
+---
+const {data, i} = Astro.props;
+import { variables } from '../../helpers/variables';
+import img from "../../assets/flecha_slider.svg";
+
+---
+<section class="sliderContainer">
+  <section class="reviews-wrapper ">
+<h2 class="sr-only">Reviews</h2>
+<div class="reviews-container container-xs" id="aja">
+  <button class="review-btn  review-btn--prev ml-5" id=`prev-${i}` aria-label="Previous Review" aria-selected=`prev-${i}`>
+      <img src={img}  width="20">
+  </button>
+  <div class=`reviews cursor-pointer flex w-full review-${i}` id=`review-${i}`>
+    {
+      data[i].images.slice(data[i].images.length - 1).map((review) => (
+        <div class="review  w-full h-full flex">
+          <img src={variables.STRAPI_PATH+review.href} alt={review.alt} class="review-avatar">
+        </div>
+      ))
+    }
+    {
+      data[i].images.map((review) => (
+        <div class="review w-full h-full flex">
+          <img src={variables.STRAPI_PATH+review.href} alt={review.alt} class="review-avatar">
+        </div>
+      ))
+    }
+    {
+      data[i].images.slice(0,1).map((review) => (
+        <div class="review w-full h-full flex">
+          <img src={variables.STRAPI_PATH+review.href} alt={review.alt} class="review-avatar">
+        </div>
+      ))
+    }
+  </div>
+  <div class="indicator-container">
+    {
+      data[i].images.map((review) => (
+        <button class="indicator ${review?.active && 'active'}"></button>
+      ))
+    }
+  </div>
+  <button class="review-btn  review-btn--next mr-5" id=`next-${i}` aria-label="Next Review" aria-selected=`next-${i}`>
+      <img src={img}  width="20" alt="">
+  </button>
+</div>
+</section>
+
+</section>
+
+<style>
+
+    .sliderContainer{
+        width: 100%;
+        
+    }
+
+    .sliderBody{
+        
+    }
+
+    .sliderBody_show{
+        opacity: 1;
+        pointer-events: unset;
+    }
+
+    .slider_picture{
+        widows: 100%;
+    }
+
+    .slider_text{
+        position: absolute;
+        display: flex;
+        height: 100%;
+        top: 0;
+        width: 100%;
+        align-items: center;
+        justify-content: left;
+        
+    }
+
+    /* REVIEWS */
+.reviews-wrapper {
+  background-color: hsl(var(--bkg));
+  margin: 0 calc(var(--size-fluid-2) * -1);
+}
+
+.reviews-wrapper::after,
+.reviews-wrapper::before {
+  inset-inline: 20%;
+}
+
+.reviews-container {
+    max-width: 100%;
+    margin: 1em auto;
+  overflow: hidden;
+  position: relative;
+  width: calc(100vw - var(--size-fluid-2));
+  background-color: hsl(var(--bkg));
+}
+
+.reviews {
+  display: flex;
+  margin: var(--size-fluid-4) 0 var(--size-fluid-5);
+  text-align: center;
+  transform: translateX(-100%);
+  transition: transform 300ms ease-in-out;
+}
+
+.review {
+  flex: 1 0 100%;
+}
+
+.review-avatar {
+    object-fit: cover;
+    cursor: pointer;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: inherit;
+    margin: auto;
+}
+
+.review-content {
+  max-width: 60%;
+  font-size: 30px;
+  line-height: 1;
+  margin: 1rem ;
+  color: white;
+}
+
+.review-btn {
+  filter: drop-shadow(2px 4px 6px black);
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  background: none;
+  border: none;
+  background-color: hsl(var(--bkg));
+  color: hsl(var(--muted));
+  padding: var(--size-1);
+  width: var(--size-fluid-4);
+  cursor: pointer;
+  transition: all 300ms var(--ease-squish-2);
+}
+
+.review-btn--prev {
+  left: 0;
+  transform: rotate(180deg);
+}
+
+.review-btn--prev:is(:hover, :focus) {
+  left: calc(var(--size-1) * -1);
+  color: hsl(var(--text));
+}
+.review-btn--next {
+  right: 0;
+}
+
+.review-btn--next:is(:hover, :focus) {  
+  color: hsl(var(--text));
+}
+
+.indicator-container {
+  position: absolute;
+  left: 50%;
+  bottom: var(--size-5);
+  display: flex;
+  justify-content: center;
+  gap: var(--size-3);
+  transform: translateX(-50%);
+  gap: 10px;
+  margin-top: -50px;
+}
+
+.indicator {
+  background: white;
+  border: 0.15em solid hsl(var(--text-alt));
+  border-radius: 50%;
+  padding: 0.3rem;
+  height: var(--size-fluid-1);
+  cursor: pointer;
+  opacity: 0.3;
+}
+
+.indicator.active {
+  background: white;
+
+}
+
+</style>
+
+<script src="../../js/slider.js" ></script>
+

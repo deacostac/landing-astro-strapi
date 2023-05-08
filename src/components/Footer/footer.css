@@ -1,0 +1,138 @@
+@media only screen and (max-width: 1700px) {
+    .mobileF{
+        padding: 15px 15px !important;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .mobilePrincipalMenu {
+        width: 60% !important;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .mobilePrincipalMenu {
+        width: 70% !important;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .mobilePrincipalMenu {
+        width: 80% !important;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .newsletterMobile{
+        padding: 20px !important;
+    }
+
+    .mobilePrincipalMenu {
+        width: 90% !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .mobileF{
+        padding: 5px 5px !important;
+    }
+    
+    .mobilePrincipal{
+        flex-direction: column;
+        justify-content: center !important;
+    }
+
+    .mobilePrincipalLogos{
+        display: flex;
+        padding: 20px 10px;
+        flex-direction: row;
+        gap: 12px;
+        justify-content: center;
+    }
+
+    .mobilePrincipalMenu{
+        width: 100% !important;
+        justify-content: space-between !important;
+        padding: 10px 20px;
+        border-top: 3px solid #fff;
+    }
+
+    .newsletterMobile{
+        padding: 10px !important;
+    }
+    
+    .newsletterMobile h1{
+        font-size: 12px;
+    }
+
+    .newsletterMobile h2{
+        font-size: 18px;
+    }
+    
+  }
+
+  @media only screen and (max-width: 500px) {
+    .mobilePrincipalMenu  p{
+        font-size: 12px;
+    }
+
+    .menuRedesMobile{
+        padding-left: 10px;
+    }
+
+    .mobileLogoB,
+    .mobileCopyright h5{
+        font-size: 12px;
+    }
+
+    .newsletterMobile h1{
+        font-size: 10px;
+    }
+
+    .newsletterMobile h2{
+        font-size: 14px;
+    }
+  }
+
+  @media only screen and (max-width: 420px) {
+    .mobilePrincipalMenu  p{
+        font-size: 10px;
+    }
+
+    .menuRedesMobile{
+        padding-left: 10px;
+    }
+
+    .mobileLogoB,
+    .mobileCopyright h5{
+        font-size: 12px;
+    }
+
+    .newsletterMobile h1{
+        font-size: 12px;
+    }
+
+    .newsletterMobile h2{
+        font-size: 10px;
+    }
+  }
+
+  @media only screen and (max-width: 390px) {
+    .mobilePrincipalMenu {
+        flex-direction: column !important;
+    }
+
+    .redesMobile{
+        flex-direction: row !important;
+        justify-content: center;
+    }
+
+    .redesMobile .redesP{
+        display: none;
+    }
+
+    .mobileLogoB,
+    .mobileCopyright h5{
+        font-size: 10px;
+    }
+  }

@@ -1,0 +1,41 @@
+header{
+    position: relative;
+}
+.menu-link{
+    color: white;
+}
+.menu-link:hover{
+    color: #ececec;
+}
+.button-hd{
+    position: static;
+margin-right: 20px;
+margin-left: 20px;
+padding: 10px 20px;
+border-radius: 5px;
+background-color: #fff;
+font-family: Montserrat,sans-serif;
+color: #e2211c;
+font-size: 12px;
+line-height: 17px;
+font-weight: 700;
+text-align: center;
+letter-spacing: .5px;
+text-transform: none;
+}
+.button-hd:hover{
+    background-color: #ececec;
+}
+.nav-hd{
+    position: absolute;
+    bottom: 7%;
+    background: white;
+    width: 100%;
+    height: 3px;
+}
+.second-menu{
+    background-color: white;
+}
+.menu-button:focus-visible{
+    outline:none;
+}

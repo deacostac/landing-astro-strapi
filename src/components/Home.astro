@@ -1,0 +1,134 @@
+---
+import Header from '../components/Header/Header';
+import Slider from '../components/slider/Slider.astro';
+import ThreeBanners from '../components/Promo-Banners/ThreeBanners.astro';
+import InfoCard from '../components/Promo-Banners/InfoCard.astro';
+import { variables } from '../helpers/variables';
+
+//Main Home Data
+const resData= await fetch(`${variables.STRAPI_PATH}/api/pages/2?populate[content][populate]=*`).then(res => res.json())
+const data:any = resData.data
+
+//Slider Home Data
+let info2 = [{
+			"id": 1,
+			"image": []
+		}]
+let infoSlider: any = []
+
+//Banners
+let propBanner: any = []		
+			
+---
+
+<main>
+    <Header client:visible />
+    <div class="main-container">
+		{data.attributes.content.map(e => {
+					if(e.__component == 'basics.slider'){
+                let validateId = -1
+                e.images.data.map((item: any)=>{
+                if(infoSlider !== undefined){
+                  validateId = infoSlider.findIndex(function (infoSlider){return infoSlider.id == e.id})
+               }
+              console.log("test", validateId)
+              if(validateId !== -1){
+                infoSlider[validateId].images.push({
+                "href": item.attributes.formats.large.url.replace(/['"]+/g, ''),
+                "alt": item.attributes.alternativeText,
+                "link": item.attributes.formats.large.path
+              })
+              }else{
+                infoSlider.push({
+                  "id": e.id,
+                  "images": [{
+                "href": item.attributes.formats.large.url.replace(/['"]+/g, ''),
+                "alt": item.attributes.alternativeText,
+                "link": item.attributes.formats.large.path
+              }]
+              })
+              }
+              
+              
+            }) 
+            return (
+                    <Slider data={infoSlider} i={validateId}/>
+                    )
+			} else if(e.__component == 'basics.banner'){
+				let ind
+				{
+					e.images.data.map((b: any)=>{
+							let validateId = propBanner.findIndex(function (propBanner){return propBanner.id == e.id})
+							ind = validateId
+							if(validateId !== -1){
+								propBanner[validateId].image.push({
+								"href": variables.STRAPI_PATH+b.attributes.formats.large.url.replace(/['"]+/g, ''),
+								"alt": variables.STRAPI_PATH+b.attributes.alternativeText,
+								"link": variables.STRAPI_PATH+b.attributes.formats.large.path
+							})
+							}else{
+								propBanner.push({
+								"id": e.id,
+								"image": [{
+								"href": variables.STRAPI_PATH+b.attributes.formats.large.url.replace(/['"]+/g, ''),
+								"alt": variables.STRAPI_PATH+b.attributes.alternativeText,
+								"link": variables.STRAPI_PATH+b.attributes.formats.large.path
+							}]
+							})
+							}
+						}) 
+				}
+				return (
+					<ThreeBanners propBanner={propBanner} ind={ind}/>
+					)
+			} else if(e.__component == 'basics.info-card'){
+				return (
+					<InfoCard 
+						title = {e.title}
+						description = {e.description}
+						boton = {e.labelButton}
+						image =  {variables.STRAPI_PATH+e.image.data.attributes.formats.large.url.replace(/['"]+/g, '')}/>
+					)
+			}
+		})
+		}
+    </div>
+</main>
+
+<style>
+	h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		margin: 0;
+	}
+	.main-container{
+		margin: auto;
+		max-width: 1280px;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		line-height: 1.6;
+		margin: 1rem 0;
+		border: 1px solid rgba(var(--accent), 25%);
+		background-color: white;
+		padding: 1rem;
+		border-radius: 0.4rem;
+	}
+	.instructions code {
+		font-size: 0.875em;
+		font-weight: bold;
+		background: rgba(var(--accent), 12%);
+		color: rgb(var(--accent));
+		border-radius: 4px;
+		padding: 0.3em 0.45em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent));
+	}
+</style>

@@ -1,0 +1,62 @@
+---
+//Info Card Data
+const response = await fetch("http://127.0.0.1:1337/api/home?populate[InfoCard][populate]=*").then(res => res.json())
+const infoCard:any = response.data
+const path = 'http://127.0.0.1:1337'
+
+export interface Props {
+    title: string;
+	description: string;
+	boton: string;   
+    image: string;   
+}
+
+const {title, description, boton, image } = Astro.props;
+---
+<div
+  class="inline-block h-8 w-8 animate-[spinner-grow_0.75s_linear_infinite] rounded-full bg-current align-[-0.125em] text-primary opacity-0 motion-reduce:animate-[spinner-grow_1.5s_linear_infinite]"
+  role="status">
+  <span
+    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+    >Loading...</span
+  >
+</div>
+<div class="mobile:flex-col-reverse laptop:flex-row info-card-container flex mt-12 mb-12">
+    <div class="mobile:w-full mobile:text-center justify-center w-2/4 bg-principal">
+        <div class="flex justify-center flex-col p-8 m-auto h-full">
+            <h2 class="mobile:text-2xl text-white font-bold mb-8">{title}</h2>
+            <h4 class="text-white laptop:text-xl mobile:text-base">{description}</h4>
+            <div class="inline-block mt-8">
+                <a class="mobile:text-xl laptop:text-xl button bg-white text-principal font-bold rounded-sm">{boton}</a>
+            </div>
+        </div>    
+    </div>
+    <div class="mobile: w-full laptop: w-2/4">
+        <img src={image} alt={infoCard.attributes.InfoCard[0].image.data.attributes.alternativeText} class="">
+    </div>
+</div>
+
+<style>
+    .banner{
+        width: 50%;
+    }
+    .button{
+        position: static;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: #fff;
+        font-family: Montserrat,sans-serif;
+        color: #e2211c;
+        font-size: 12px;
+        line-height: 17px;
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: .5px;
+        text-transform: none;
+        cursor: pointer;
+    }
+
+    .button:hover{
+    background-color: #ececec;
+}
+</style>

@@ -1,0 +1,123 @@
+---
+import Newsletter from './Newsletter.astro';
+import './footer.css'
+
+export interface Props {	
+  
+}
+
+const fecha = new Date();
+const añoActual = fecha.getFullYear();
+
+//Main Image Data
+const path = 'http://127.0.0.1:1337'
+const resFooter= await fetch("http://127.0.0.1:1337/api/footer?populate[MainFooter][populate]=*").then(res => res.json())
+const footer:any = resFooter.data
+
+//Main Image Data
+const resFooterMenu= await fetch("http://127.0.0.1:1337/api/footer?populate[menuColumn][populate]=*").then(res => res.json())
+const footerMenu:any = resFooterMenu.data
+
+
+const footerImages = [
+  {
+    'href': `${path+JSON.stringify(footer.attributes.MainFooter[0].Images.data[0].attributes.url).replace(/['"]+/g, '')}`,
+    'link': '/'
+  },
+  {
+    'href': `${path+JSON.stringify(footer.attributes.MainFooter[0].Images.data[1].attributes.url).replace(/['"]+/g, '')}`,
+  },
+  {
+    'href': `${path+JSON.stringify(footer.attributes.MainFooter[0].Images.data[2].attributes.url).replace(/['"]+/g, '')}`,
+  },
+  {
+    'href': `${path+JSON.stringify(footer.attributes.MainFooter[0].Images.data[3].attributes.url).replace(/['"]+/g, '')}`,
+  }]
+
+  const footerRedes = [
+  {
+    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[0].attributes.url).replace(/['"]+/g, '')}`,
+    'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[0].attributes.name).replace(/['"]+/g, '')}`,
+    'link': '/'
+  },
+  {
+    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[1].attributes.url).replace(/['"]+/g, '')}`,
+    'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[1].attributes.name).replace(/['"]+/g, '')}`,
+    'link': '/'
+  },
+  {
+    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[2].attributes.url).replace(/['"]+/g, '')}`,
+    'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[2].attributes.name).replace(/['"]+/g, '')}`,
+    'link': '/'
+  },
+  {
+    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[3].attributes.url).replace(/['"]+/g, '')}`,
+    'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[3].attributes.name).replace(/['"]+/g, '')}`,
+    'link': '/'
+  },
+  {
+    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[4].attributes.url).replace(/['"]+/g, '')}`,
+    'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[4].attributes.name).replace(/['"]+/g, '')}`,
+    'link': '/'
+  }]
+
+  const footerMenuItem = footerMenu.attributes.menuColumn[0].options
+
+---
+
+<Newsletter/>
+<section class="mobileF flex flex-col [background-color:#252525] pt-10 pb-8 pr-32 pl-32 bottom-0 text-white [color:#fff]">
+    <div class="mobilePrincipal flex justify-between">
+        <div class="mobilePrincipalLogos">{footerImages.map((image)=>{
+            return(
+            <a href="https://www.circlek.com.mx/#" class="max-h-14 mb-5 flex">
+                <img width="100px" src={image.href} alt="">
+            </a>
+            )
+        })}            
+        </div>
+        <div class="mobilePrincipalMenu w-2/5 flex justify-around">
+            <div class="mobilePrincipalMenu2">
+                <h1 class="text-2xl mb-2 font-bold">Inicio</h1>
+                <div class="flex flex-col flex-wrap gap-5 max-h-52">
+                    {footerMenuItem.map((items)=>{
+                        return(
+                        <a href={items.url} class="hover:underline">
+                            <p>{items.text}</p>
+                        </a>
+                        )
+                    })}  
+                </div>
+            </div>
+            <div class="menuRedesMobile">
+                <h1 class="text-2xl mb-2 font-bold">Nuestras Redes</h1>
+                <div class="flex flex-col  gap-5 redesMobile">
+                    {footerRedes.map((redes)=>{
+                        return(
+                        <div class="flex gap-2 ">
+                            <a href={redes.link} class="flex">
+                            <img width="25px" src={redes.href} alt="">
+                        </a>
+                        <a href={redes.link} class="hover:underline redesP">
+                            <p>{redes.text}</p>
+                        </a>
+                        </div>
+                        )
+                    })}  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-4 border-2 border-white mt-4"></div>
+    <div class="flex text-white w-full justify-between">
+        <div class="mobileCopyright">
+            <h5 class="text-white ">Copyright © {añoActual}, Contigo Circle K</h5>
+        </div>
+        <div class="flex gap-1.5 mobileLogoB">
+            <h5 class="text-white">Desarrollado por </h5>
+            <a href="">
+                <img width="100px" src="https://www.circlek.com.mx/_nuxt/img/BLN_isologo-horizontal_1-negro.c080b7a.png" alt="">
+            </a>
+        </div>
+    </div>
+</section>
