@@ -36,14 +36,14 @@ export default function Example() {
 
   return (
     <header className="bg-principal">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div className="flex lg:flex-1">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 laptop:px-8" aria-label="Global">
+        <div className="flex laptop:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">CircleK</span>
             <img className="h-8 w-auto" src="https://www.circlek.com.mx/_nuxt/img/circlek-logo.9ef7a16.png" alt="" />
           </a>
         </div>
-        <div className="flex lg:hidden">
+        <div className="flex laptop:hidden">
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -53,7 +53,7 @@ export default function Example() {
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <Popover.Group className="hidden lg:flex lg:gap-x-12">
+        <Popover.Group className="hidden laptop:flex laptop:gap-x-12">
           <Popover className="relative">
             <Popover.Button className="menu-button flex items-center gap-x-1 text-sm font-semibold leading-6 menu-link">
               Nuestras Marcas
@@ -115,16 +115,16 @@ export default function Example() {
             Recargas
           </a>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden laptop:flex laptop:flex-1 laptop:justify-end">
           <a href="#" className="text-sm font-bold leading-6 button-hd">
             ContigoCK
           </a>
         </div>
       </nav>
       <div className="nav-hd bg-white" />
-      <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+      <Dialog as="div" className="laptop:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 second-menu">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 mobile:max-w-mobile mobile:ring-1 mobile:ring-gray-900/10 second-menu">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Circle K</span>
