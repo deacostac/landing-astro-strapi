@@ -11,15 +11,9 @@ const {propBanner, ind} = Astro.props;
   {propBanner[ind].image.map((image)=>{
     return(
           <div class="promo-container">
-            <img src={image.href} alt={image.alt} class={`m-auto banner w-11/12 flex cursor-pointer`}>
+            <img src={image.href} alt={image.alt} class={`m-auto w-11/12 flex cursor-pointer`}>
         </div>
     )
 })} 
 </div>
 </section>
-
-<style>
-    .banner{
-        width: 50%;
-    }
-</style>
