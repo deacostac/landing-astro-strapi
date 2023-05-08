@@ -1,9 +1,4 @@
 ---
-//Info Card Data
-const response = await fetch("http://127.0.0.1:1337/api/home?populate[InfoCard][populate]=*").then(res => res.json())
-const infoCard:any = response.data
-const path = 'http://127.0.0.1:1337'
-
 export interface Props {
     title: string;
 	description: string;
@@ -32,7 +27,7 @@ const {title, description, boton, image } = Astro.props;
         </div>    
     </div>
     <div class="mobile: w-full laptop: w-2/4">
-        <img src={image} alt={infoCard.attributes.InfoCard[0].image.data.attributes.alternativeText} class="">
+        <img src={image} alt={title} class="">
     </div>
 </div>
 

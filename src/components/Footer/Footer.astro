@@ -1,6 +1,7 @@
 ---
 import Newsletter from './Newsletter.astro';
 import './footer.css'
+import { variables } from '../../helpers/variables';
 
 export interface Props {	
   
@@ -10,53 +11,52 @@ const fecha = new Date();
 const añoActual = fecha.getFullYear();
 
 //Main Image Data
-const path = 'http://127.0.0.1:1337'
-const resFooter= await fetch("http://127.0.0.1:1337/api/footer?populate[MainFooter][populate]=*").then(res => res.json())
+const resFooter= await fetch(`${variables.STRAPI_PATH}/api/footer?populate[MainFooter][populate]=*`).then(res => res.json())
 const footer:any = resFooter.data
 
 //Main Image Data
-const resFooterMenu= await fetch("http://127.0.0.1:1337/api/footer?populate[menuColumn][populate]=*").then(res => res.json())
+const resFooterMenu= await fetch(`${variables.STRAPI_PATH}/api/footer?populate[menuColumn][populate]=*`).then(res => res.json())
 const footerMenu:any = resFooterMenu.data
 
 
 const footerImages = [
   {
-    'href': `${path+JSON.stringify(footer.attributes.MainFooter[0].Images.data[0].attributes.url).replace(/['"]+/g, '')}`,
+    'href': `${variables.STRAPI_PATH+JSON.stringify(footer.attributes.MainFooter[0].Images.data[0].attributes.url).replace(/['"]+/g, '')}`,
     'link': '/'
   },
   {
-    'href': `${path+JSON.stringify(footer.attributes.MainFooter[0].Images.data[1].attributes.url).replace(/['"]+/g, '')}`,
+    'href': `${variables.STRAPI_PATH+JSON.stringify(footer.attributes.MainFooter[0].Images.data[1].attributes.url).replace(/['"]+/g, '')}`,
   },
   {
-    'href': `${path+JSON.stringify(footer.attributes.MainFooter[0].Images.data[2].attributes.url).replace(/['"]+/g, '')}`,
+    'href': `${variables.STRAPI_PATH+JSON.stringify(footer.attributes.MainFooter[0].Images.data[2].attributes.url).replace(/['"]+/g, '')}`,
   },
   {
-    'href': `${path+JSON.stringify(footer.attributes.MainFooter[0].Images.data[3].attributes.url).replace(/['"]+/g, '')}`,
+    'href': `${variables.STRAPI_PATH+JSON.stringify(footer.attributes.MainFooter[0].Images.data[3].attributes.url).replace(/['"]+/g, '')}`,
   }]
 
   const footerRedes = [
   {
-    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[0].attributes.url).replace(/['"]+/g, '')}`,
+    'href': `${variables.STRAPI_PATH+JSON.stringify(footer.attributes.MainFooter[1].Images.data[0].attributes.url).replace(/['"]+/g, '')}`,
     'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[0].attributes.name).replace(/['"]+/g, '')}`,
     'link': '/'
   },
   {
-    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[1].attributes.url).replace(/['"]+/g, '')}`,
+    'href': `${variables.STRAPI_PATH+JSON.stringify(footer.attributes.MainFooter[1].Images.data[1].attributes.url).replace(/['"]+/g, '')}`,
     'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[1].attributes.name).replace(/['"]+/g, '')}`,
     'link': '/'
   },
   {
-    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[2].attributes.url).replace(/['"]+/g, '')}`,
+    'href': `${variables.STRAPI_PATH+JSON.stringify(footer.attributes.MainFooter[1].Images.data[2].attributes.url).replace(/['"]+/g, '')}`,
     'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[2].attributes.name).replace(/['"]+/g, '')}`,
     'link': '/'
   },
   {
-    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[3].attributes.url).replace(/['"]+/g, '')}`,
+    'href': `${variables.STRAPI_PATH+JSON.stringify(footer.attributes.MainFooter[1].Images.data[3].attributes.url).replace(/['"]+/g, '')}`,
     'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[3].attributes.name).replace(/['"]+/g, '')}`,
     'link': '/'
   },
   {
-    'href': `${path+JSON.stringify(footer.attributes.MainFooter[1].Images.data[4].attributes.url).replace(/['"]+/g, '')}`,
+    'href': `${variables.STRAPI_PATH+JSON.stringify(footer.attributes.MainFooter[1].Images.data[4].attributes.url).replace(/['"]+/g, '')}`,
     'text': `${JSON.stringify(footer.attributes.MainFooter[1].Images.data[4].attributes.name).replace(/['"]+/g, '')}`,
     'link': '/'
   }]
